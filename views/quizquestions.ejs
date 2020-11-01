@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Trivia Quiz</title>
+</head>
+
+<!-- stylesheet -->
+<link rel="stylesheet" href="/css/styles.css">
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
+
+<body>
+
+  <div class="main-title">
+    <h1>Trivia Quiz</h1>
+  </div>
+
+  <!-- show question number -->
+
+  <div class="question-number">
+    <h2>Question <%= questionNumber %>/10</h2>
+  </div>
+
+  <!-- show question -->
+
+  <div class="question">
+    <span class="question-text"><%= round_questions[questionNumber - 1].question %></span>
+  </div>
+
+
+  <div class="answers">
+  <!-- for each question, go through answer choices and display each as a radio button -->
+    <% for(var i = 0; i < round_questions[questionNumber - 1].answerchoices.length; i++){ %>
+
+    <div class="answer-choice">
+
+<form action="/quizquestionresult/<%= questionNumber %>" method="post">
+
+      <input type="radio" onclick="<% selected_answer = round_questions[questionNumber - 1].answerchoices[i] %>"class="answer-text" name="answerchoice" value="<%= round_questions[questionNumber - 1].answerchoices[i] %>">
+      <label for="<%= round_questions[questionNumber - 1].answerchoices[i] %>"><span class="answer-choice"><%= round_questions[questionNumber - 1].answerchoices[i] %></span></label>
+
+    </div>
+    <br />
+
+    <% } %>
+
+  <div class="submit-button-div">
+    <button class="submit-button" type="submit" name="button"><p class="submit-text">Submit</p></button>
+
+  </div>
+
+</form>
+
+
+
+
+  </div>
+
+
+</body>
+
+</html>

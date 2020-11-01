@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Trivia Quiz</title>
+</head>
+
+<!-- stylesheet -->
+<link rel="stylesheet" href="/css/styles.css">
+
+<!-- fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
+
+<body>
+
+  <div class="main-title">
+    <h1>Trivia Quiz</h1>
+  </div>
+
+
+<div class="start-div">
+
+<form action="/quizquestions/<%= questionNumber %>" method="post">
+  <button type="submit" class="start-quiz" name="startquiz"> <h2>Start Quiz</h2> </button>
+
+</form>
+
+</div>
+
+
+
+</body>
+
+</html>
