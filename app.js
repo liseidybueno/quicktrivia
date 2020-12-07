@@ -41,11 +41,6 @@ app.use('/', createnewpw);
 
 app.use('/', emailwpw);
 
-let port = process.env.PORT;
-if (port == null || port == "") {
-  port = 8000;
-}
-
-app.listen(port, function() {
+app.listen(process.env.PORT || 5000, function() {
   console.log("Server started successfully.");
 });
