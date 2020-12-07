@@ -47,14 +47,16 @@ function validatePWMsg(viewList){
 
 function createScoreboard(results){
   var score_array = new Array();
-  for (var i = 0; i < results.length; i++) {
-    //create object that holds user and score
-    var user_score = new Object();
-    user_score.username = results[i].username;
-    user_score.score = results[i].total_score;
+  if(results.length > 0){
+    for (var i = 0; i < results.length; i++) {
+      //create object that holds user and score
+      var user_score = new Object();
+      user_score.username = results[i].username;
+      user_score.score = results[i].total_score;
 
-    //push into array
-    score_array.push(user_score);
+      //push into array
+      score_array.push(user_score);
+    }
   }
 
   return score_array;
