@@ -47,7 +47,7 @@ function validatePWMsg(viewList){
 
 function createScoreboard(results){
   var score_array = new Array();
-  if(results.length > 0){
+  if(results != undefined){
     for (var i = 0; i < results.length; i++) {
       //create object that holds user and score
       var user_score = new Object();
