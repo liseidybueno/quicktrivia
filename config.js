@@ -1,11 +1,3 @@
-// let config = {
-//   host    : 'localhost',
-//   user    : 'root',
-//   password: 'AbC123XyZ321',
-//   database: 'triviaquizdb'
-// };
-// module.exports = config;
-
 module.exports = {
   HOST: "us-cdbr-east-02.cleardb.com",
   USER: "b723f6aa651753",
