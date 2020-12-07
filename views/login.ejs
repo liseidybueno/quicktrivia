@@ -1,0 +1,63 @@
+<%- include("partials/header"); -%>
+
+
+<div class="login-register">
+
+  <div class="login-register-title">
+    <h2>Login</h2>
+  </div>
+
+
+    <div id="login-error"></div>
+      <form class="login-form" id="loginform">
+        <input class="top" type="text" id="username" name="username" placeholder="Username"/>
+        <input class="bottom" type="password" id="password" name="password" placeholder="Password">
+
+        <button class="login-button" type="submit" name="button">Log In</button>
+        <p>
+          <a class="register-link" href="/register">Register</a>
+          </p>
+          <p>
+            <a class="register-link" href="/">Back to Home</a>
+            </p>
+            <p>
+              Forgot password? <a class="register-link" href="/resetpassword">Reset Password</a>
+
+              </p>
+
+      </form>
+      </div>
+
+      <script type="text/javascript">
+
+        $("#loginform").submit(function(e) {
+          e.preventDefault();
+          $.ajax({
+            url: "/login-get",
+            type: "POST",
+            data: {
+              username: document.getElementById("username").value,
+              password: document.getElementById("password").value,
+            },
+            success: function(returned_data){
+              // alert(returned_data.login_error);
+              if (returned_data.redirect) {
+                  window.location.href = returned_data.redirect_url;
+                } else {
+              var div = document.getElementById('login-error');
+              div.innerHTML = "";
+              var para = document.createElement("p");
+              var msg = document.createTextNode(returned_data.login_error);
+              para.appendChild(msg);
+              div.appendChild(para);
+              document.getElementById("password").value = "";
+            }
+            }
+          });
+        });
+      </script>
+
+
+</div>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<%- include("partials/header"); -%>
+
+<div class="login-register">
+  <div class="login-register-title">
+    <h2>Register</h2>
+  </div>
+
+<div id="error_msg"></div>
+  <form class="registration-form" id="registerform">
+    <input class="top" type="text" id="fname" name="fname" placeholder="First Name" />
+    <input class="middle" type="text" id="username" name="username" placeholder="Username" />
+    <input class="middle" type="email" id="email" name="email" placeholder="Email" />
+    <input class="bottom" type="password" id="password" name="password" placeholder="Password">
+    <label class="security-question" for="security-questions">Security Question</label>
+    <select class="top-select" id="sec_quest" name="sec_quest">
+      <option value="1">What was your childhood nickname?</option>
+      <option value="2">What street did you live on in third grade?</option>
+      <option value="3">What is your oldest sibling's middle name?</option>
+      <option value="4">What school did you attend for sixth grade?</option>
+      <option value="5">What is your mother's middle name?</option>
+    </select>
+    <input type="text" id="sec_answer" class="bottom" name="security_answer" placeholder="Answer">
+    <button class="register-button" type="submit" name="button">Register</button>
+  </form>
+
+
+  <script type="text/javascript">
+
+    $("#registerform").submit(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/register-get",
+        type: "POST",
+        data: {
+          fname: document.getElementById("fname").value,
+          username: document.getElementById("username").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          sec_quest: document.getElementById("sec_quest").value,
+          sec_answer: document.getElementById("sec_answer").value
+        },
+        success: function(returned_data){
+          //get the div variable
+          var div = document.getElementById('error_msg');
+          if (returned_data.redirect) {
+              window.location.href = returned_data.redirect_url;
+            }
+          div.innerHTML = "";
+          //if the security message is not answered
+          if(returned_data.security_msg != undefined){
+            var para = document.createElement("p");
+            para.style.margin = "1px";
+            var message = document.createTextNode(returned_data.security_msg);
+            para.appendChild(message);
+            div.appendChild(para);
+          }
+          //if the first name is not entered
+          if(returned_data.empty != undefined){
+            var para = document.createElement("p");
+            para.style.margin = "1px";
+            var message = document.createTextNode(returned_data.empty);
+            para.appendChild(message);
+            div.appendChild(para);
+            document.getElementById("password").value = "";
+          }
+          //if the user exists, show the message
+          if(returned_data.user_exists != undefined){
+            var para = document.createElement("p");
+            para.style.margin = "1px";
+            var message = document.createTextNode(returned_data.user_exists);
+            para.appendChild(message);
+            div.appendChild(para);
+            document.getElementById("password").value = "";
+          }
+          //if the password has at least one validation error
+          if(returned_data.message.length > 0){
+            for(var i = 0; i < returned_data.message.length; i++){
+              var para = document.createElement("p");
+              para.style.margin = "1px";
+              var message = document.createTextNode(returned_data.message[i]);
+              para.appendChild(message);
+              div.appendChild(para);
+            }
+            document.getElementById("password").value = "";
+          }
+        }
+      });
+    });
+  </script>
+
+
+  <p>
+    <a class="register-link" href="/">Back to Home</a>
+  </p>
+
+</div>
+
+</div>
+</body>
+
+</html>

@@ -1,33 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title>Trivia Quiz</title>
-</head>
-
-<!-- stylesheet -->
-<link rel="stylesheet" href="/css/styles.css">
-
-<!-- fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-
-<body>
-
-  <div class="main-title">
-    <h1>Trivia Quiz</h1>
-  </div>
+<%- include("partials/header"); -%>
 
   <!-- show question number -->
 
   <div class="question-number">
-    <h2>Question <%= questionNumber %>/10</h2>
+    <h2>Question <%= questionNumber %></h2>
   </div>
 
   <!-- show question -->
 
   <div class="question">
-    <span class="question-text"><%= round_questions[questionNumber - 1].question %></span>
+    <span class="question-text"> <%= round_questions[questionNumber - 1].question %></span>
+  </div>
+
+  <div class="timer">
+    Time Remaining  <span id="time">:15</span>
   </div>
 
 
@@ -48,17 +34,45 @@
     <% } %>
 
   <div class="submit-button-div">
-    <button class="submit-button" type="submit" name="button"><p class="submit-text">Submit</p></button>
+
+    <input type="hidden" name="score" value="<%= score %>">
+
+      <button class="submit-button" type="submit" name="button" id="submit-question"><p class="submit-text">Submit Question</p></button>
+
 
   </div>
 
 </form>
 
+<script>
+  setTimeout(function () {document.getElementById("submit-question").click();}, 16000);
 
+  function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    setInterval(function () {
+        seconds = parseInt(timer % 60, 10);
+
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = ":" + seconds;
+
+        if (--timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+
+window.onload = function () {
+    var fifteenSec = 15,
+        display = document.querySelector('#time');
+    startTimer(fifteenSec, display);
+};
+
+
+</script>
 
 
   </div>
-
 
 </body>
 

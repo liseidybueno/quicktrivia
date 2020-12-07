@@ -1,34 +1,90 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title>Trivia Quiz</title>
-</head>
-
-<!-- stylesheet -->
-<link rel="stylesheet" href="/css/styles.css">
-
-<!-- fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-
-<body>
-
-  <div class="main-title">
-    <h1>Trivia Quiz</h1>
-  </div>
-
+<%- include("partials/header"); -%>
 
 <div class="start-div">
 
+  <h2>Take a Quiz</h2>
+  <%  if(curr_user.username != ""){ %>
+      <p>
+        Welcome to Quick Trivia, <%= curr_user.fname %>! Choose a category & number of questions below.
+        You have 15 seconds to answer each question. Your total user score is the percent of all correct
+        answers from all questions attempted from every quiz you've taken so far.  You have 15 seconds to answer each
+        question. Good luck!
+
+      </p>
+<%    } else { %>
+      <p>
+        Welcome to Quick Trivia! Take a quiz anonymously or log in/register to record
+        your score and get a spot on our scoreboard. Choose a category & number of questions below.
+        You have 15 seconds to answer each question. Good luck!
+      </p>
+
+<%    } %>
+
+
 <form action="/quizquestions/<%= questionNumber %>" method="post">
-  <button type="submit" class="start-quiz" name="startquiz"> <h2>Start Quiz</h2> </button>
+
+  <label for="category">Category:</label>
+  <select class="dropdown" name="category">
+    <option value="9">General Knowledge</option>
+    <option value="10">Books</option>
+    <option value="11">Film</option>
+    <option value="12">Music</option>
+    <option value="13">Musicals & Theater</option>
+    <option value="14">Television</option>
+    <option value="15">Video Games</option>
+    <option value="16">Board Games</option>
+    <option value="17">Science and Nature</option>
+    <option value="18">Computers</option>
+    <option value="19">Math</option>
+    <option value="20">Myth</option>
+    <option value="21">Sports</option>
+    <option value="22">Geography</option>
+    <option value="23">History</option>
+    <option value="24">Politics</option>
+    <option value="25">Art</option>
+    <option value="26">Celebrities</option>
+    <option value="27">Animals</option>
+    <option value="28">Cars</option>
+    <option value="29">Comics</option>
+    <option value="32">Cartoons</option>
+  </select>
+<br />
+  <label for="number">Number of Questions: </label>
+  <select class="dropdown" name="number">
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+    <option value="13">13</option>
+    <option value="14">14</option>
+    <option value="15">15</option>
+    <option value="16">16</option>
+    <option value="17">17</option>
+    <option value="18">18</option>
+    <option value="19">19</option>
+    <option value="20">20</option>
+
+  </select>
+
+<div>
+  <input type="hidden" name="score" value="<%= score %>">
+
+    <button type="submit" class="start-quiz" name="startquiz"> Start Quiz </button>
+
+</div>
 
 </form>
 
 </div>
 
+<%- include("partials/scoreboard"); -%>
 
+
+    </div>
 
 </body>
 

@@ -1,0 +1,27 @@
+<div class="scoreboard">
+
+  <h2>Scoreboard</h2>
+
+    <table class="score-table">
+    <tr>
+      <th>
+        User
+      </th>
+      <th>Score</th>
+    </tr>
+  <%  var i = 0; %>
+  <%  while(i < 15 && i < score_array.length){ %>
+      <tr>
+        <td>
+        <%= i + 1 %>. <%=  score_array[i].username %>
+          </td>
+          <td>
+        <%=    score_array[i].score %>%
+            </td>
+              </tr>
+    <%  i++; %>
+  <%  } %>
+
+  </table>
+
+  </div>

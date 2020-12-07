@@ -1,158 +1,256 @@
 body {
-  background-color: #000000;
-  font-family: 'Nunito';
+  font-family: 'Libre Franklin';
   font-size: 1.3rem;
 }
 
 h1 {
-  color: #FFFFFF;
-  -webkit-text-stroke-width: 1px;
-    -webkit-text-stroke-color: #00de0b;
-  font-family: 'Turret Road';
-  font-size: 5rem;
+  color: #00107F;
+  font-family: 'Lobster Two';
+  font-size: 4rem;
 }
 
 h2 {
   color: #FFFFFF;
-  font-family: 'Nunito';
+  font-family: 'Montserrat';
   font-size: 3rem;
   font-weight: 100;
 }
 
+h3 {
+  color: #FFFFFF;
+  font-family: 'Libre Franklin';
+  font-size: 1.25rem;
+  font-weight: 200;
+}
+
 a {
   text-decoration: none;
+  font-size: 2rem;
+  font-weight: 100;
+}
+
+a:hover, .button-link:hover {
+  color: #f2f2f2;
+}
+
+.button-link {
+  font-family: 'Libre Franklin';
+  background: none;
+  border: none;
+  text-decoration: none;
+  font-size: 2rem;
+  font-weight: 100;
+  cursor: pointer;
+}
+
+.container {
+  margin-left: 10%;
+  margin-right: 10%;
+  background-color: #EE6F57;
+  min-height: 100vh;
+  width: 80%;
+}
+
+.top-bar {
+  margin-bottom: 80px;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.navigation {
+  display: block;
+  width: 100%;
+  padding-top: 65px;
+  position: relative;
+  text-align: right;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 100;
+  color: #F2F2F2;
+  padding: 0 2% 0 2%;
+}
+
+.nav-link:hover {
+  color: #474747;
+}
+
+.title {
+  text-align: left;
+  float: left;
+}
+
+.info-box {
+  width: 35%;
+  background-color: #eda89a;
+  display: none;
+  margin-top: 20px;
+  position: absolute;
+  right: 0;
+  font-size: .9rem;
+  text-align: center;
+}
+
+.view-info:hover+.info-box {
+  display: block;
+}
+
+.view-info:hover {
+  cursor: pointer;
+}
+
+.info-box-titles {
+  /* position: absolute;
+  left: 2%; */
+  font-weight: 500;
+}
+
+.info {
+  font-weight: 200;
+}
+
+.info-box-main-title {
+  width: 100%;
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+/*
+HOME PAGE */
+.start-div {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.dropdown {
+  font-size: 1rem;
+  padding: 1% 0 1% 0;
+  margin: 1% 0 1% 0;
+}
+
+/* SCOREBOARD */
+.scoreboard {
+  text-align: center;
+  padding-bottom: 5%;
+}
+
+.score-table {
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+  border-style: solid;
+  border-radius: 25px;
+  border-color: #FFFFFF;
+  padding: 1% 3% 3% 3%;
+  border-width: 1px;
+  font-size: 1rem;
+}
+
+/*
+Question Page */
+.question {
+  border-style: solid;
+  border-radius: 25px;
+  border-color: #1F3C88;
+  border-width: 2px;
+  text-align: center;
+  padding: 3%;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 2%;
 }
 
 .question-text {
-  color: #c9c9c9;
-  font-family: 'Nunito';
+  color: #f2f2f2;
+  font-family: 'Montserrat';
   font-size: 1.5rem;
-  font-weight: 500;
+  font-weight: 300;
   text-align: center;
 }
 
-.answer-text {
-  color: #c9c9c9;
-  font-family: 'Nunito';
-  font-size: 1rem;
+.answer-choice {
+  color: #f2f2f2;
+  font-family: 'Montserrat';
+  font-size: 1.25rem;
   font-weight: 100;
   text-align: center;
-}
-
-.main-title {
-  text-align: center;
-  margin-top: 5%;
+  padding: .5% 1% .5% 1%;
 }
 
 .question-number {
   text-align: center;
 }
 
-.question {
-  border-style: solid;
-  border-radius: 25px;
-  border-color: #00DE0B;
-  border-width: 2px;
+.timer {
   text-align: center;
-  padding: .5% 3% .5% 3%;
-  width: 50%;
-margin: 0 auto;
-margin-bottom: 5%;
+  margin: 1% 0 2% 0;
+  font-family: 'Libre Franklin';
+  font-size: 1.5rem;
+  color: #F2F2F2;
+  font-weight: 100;
 }
 
 .answers {
   margin-top: 10%;
   margin-bottom: 5%;
   width: 50%;
-margin: 0 auto;
-text-align: center;
-}
-
-.answer-choice {
+  margin: 0 auto;
   text-align: center;
-  padding: .5% 1% .5% 1%;
-  color: #FFFFFF;
 }
 
-.correct-answer {
-  text-align: center;
-  margin-top: 3%;
-  padding: .5% 1% .5% 1%;
-  color: #00DE0B;
-
-}
-
-.submit-button, .next-button{
-  background-color: #242424;
-  border-color: #00DE0B;
+.submit-button {
+  border-color: #1F3C88;
   border-radius: 25px;
   border-style: solid;
   text-align: center;
-  color: #FFFFFF;
-  font-family: 'Nunito';
-  font-size: 1.5rem;
-  margin-left: 5%;
-  margin-right: 5%;
+  color: #00107F;
+  font-family: 'Libre Franklin';
+  font-size: 1rem;
+  margin: 3%;
+  padding: 2%;
 }
 
-.submit-button-div{
+.submit-button-div {
   width: 50%;
-margin: 0 auto;
+  margin: 0 auto;
   margin-top: 5%;
 }
 
-
-.next-question{
+.next-question {
   text-align: center;
   margin-top: 30%;
   padding: .5% 1% .5% 1%;
   margin: 0 auto;
 }
 
-.start-div{
-  margin-top: 3%;
-  padding: 3% 3% 3% 3%;
-  width: 50%;
-  margin: 0 auto;
-  text-align: center;
-}
-
 .start-quiz {
   border-style: solid;
   border-radius: 25px;
-  border-color: #00DE0B;
-  background-color: #242424;
   border-width: 2px;
   text-align: center;
-  padding: 3% 3% 3% 3%;
-  cursor: pointer;
   margin: 0 auto;
+  padding: 3%;
+  margin-top: 2%;
 }
 
-.start-quiz:hover, .next-button:hover, .submit-button:hover {
-  background-color: #00DE0B;
+.start-quiz:hover, .submit-button:hover {
   cursor: pointer;
-}
-
-.next-button {
-  border-style: solid;
-  border-radius: 25px;
-  border-color: #00DE0B;
-  background-color: #242424;
-  border-width: 2px;
-  text-align: center;
-  margin-bottom: 3%;
-  padding: 1% 3% 1% 3%;
+  background-color: #00107F;
   color: #FFFFFF;
-  font-family: 'Nunito';
-  font-size: 1rem;
 }
 
 .final-score {
   border-style: solid;
   border-radius: 25px;
-  border-color: #00DE0B;
-  background-color: #242424;
+  border-color: #00107F;
   border-width: 2px;
   text-align: center;
   padding: 3% 3% 3% 3%;
@@ -160,8 +258,122 @@ margin: 0 auto;
   width: 80%;
 }
 
-.take-again{
+.take-again {
   margin: 0 auto;
   text-align: center;
   margin-top: 5%;
+}
+
+/* REGISTER & LOGIN */
+.login-register, .reset-password, .create-new-password {
+  text-align: center;
+}
+
+.login-register-title {
+  text-align: center;
+}
+
+.registration-form, .login-form, .reset-form {
+  padding: 0 20% 0 20%;
+  box-sizing: border-box;
+  height: auto;
+  font-size: 16px;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+
+.top {
+  width: 100%;
+  font-size: 1.1rem;
+  font-family: 'Libre Franklin';
+  margin-bottom: -2px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 1%;
+  border-width: 1px;
+}
+
+.top-select {
+  width: 102.45%;
+  font-size: 1.1rem;
+  font-family: 'Libre Franklin';
+  margin-bottom: -2px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  padding: 1%;
+  border-width: 1px;
+}
+
+.middle {
+  width: 100%;
+  font-size: 1.1rem;
+  font-family: 'Libre Franklin';
+  border-radius: 0;
+  margin-bottom: -2px;
+  padding: 1%;
+  border-width: 1px;
+}
+
+.bottom {
+  width: 100%;
+  font-size: 1.1rem;
+  font-family: 'Libre Franklin';
+  margin-bottom: 2%;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding: 1%;
+  border-width: 1px;
+}
+
+.register-button, .login-button {
+  margin: 2%;
+  border-color: #1F3C88;
+  border-radius: 25px;
+  border-style: solid;
+  text-align: center;
+  color: #00107F;
+  font-family: 'Libre Franklin';
+  font-size: 1rem;
+  padding: 2%;
+}
+
+.register-button:hover, .login-button:hover {
+  cursor: pointer;
+  background-color: #00107F;
+  color: #FFFFFF;
+}
+
+.security-question {
+  font-size: 1.1rem;
+  color: #F2F2F2;
+}
+
+.register-link {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 100;
+}
+
+.register-link:hover {
+  color: #f2f2f2;
+}
+
+#error_msg, #login-error {
+  font-size: .8rem;
+  margin-bottom: 2%;
+}
+
+/*RESET PW*/
+.security-question-check {
+  display: none;
+  padding-top: 2%;
+}
+
+.security_answer {
+  margin-top: 2%;
 }

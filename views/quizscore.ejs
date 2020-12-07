@@ -1,33 +1,25 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title>Trivia Quiz</title>
-</head>
-
-<!-- stylesheet -->
-<link rel="stylesheet" href="/css/styles.css">
-
-<!-- fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-
-<body>
-
-  <div class="main-title">
-    <h1>Trivia Quiz</h1>
-  </div>
+<%- include("partials/header"); -%>
 
 
 <div class="final-score">
 
- <h2>Final Score: <%= score %>/10</h2>
+ <h2>Final Score: <%= score %>/<%= round_questions.length%></h2>
+
+<% if(curr_user.username != ""){ %>
+  <p>
+    Your total score percentage is <%= curr_user.total_score %>%.
+    </p>
+<% } %>
 
 </div>
 
 <div class="take-again">
-  <button class="next-button" type="button" name="button"><a href="/"><h2>Take Quiz Again</h2></a></button>
+  <form action="/" method="post">
+    <button class="button-link" type="submit" name="button">Take Another Quiz</button>
+  </form>
 </div>
+
+<%- include("partials/scoreboard"); -%>
 
 
 

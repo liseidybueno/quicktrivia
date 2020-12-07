@@ -1,26 +1,7 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title>Trivia Quiz</title>
-</head>
-
-<!-- stylesheet -->
-<link rel="stylesheet" href="/css/styles.css">
-
-<!-- fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700;800&family=Turret+Road:wght@200;300;400;500;700;800&display=swap" rel="stylesheet">
-
-<body>
-
-  <div class="main-title">
-    <h1>Trivia Quiz</h1>
-  </div>
-
+<%- include("partials/header"); -%>
 
   <div class="question-number">
-    <h2>Question <%= questionNumber %>/10</h2>
+    <h2>Question <%= questionNumber %></h2>
   </div>
 
   <div class="question">
@@ -39,15 +20,18 @@
 
     <% if(selected_answer == correct_answer){ %>
       <%  if(selected_answer == round_questions[questionNumber - 1].answerchoices[i]){ %>
-          <div class="answer-choice" style="background-color: #00DE0B"><%= round_questions[questionNumber - 1].answerchoices[i] %></div>
+          <span class="answer-choice" style="background-color: #0e8a00"><%= round_questions[questionNumber - 1].answerchoices[i] %></span>
     <%    } else { %>
-        <div class="answer-choice"><%= round_questions[questionNumber - 1].answerchoices[i] %></div>
+        <span class="answer-choice"><%= round_questions[questionNumber - 1].answerchoices[i] %></span>
     <%  } %>
     <% } else { %>
     <%    if(selected_answer == round_questions[questionNumber - 1].answerchoices[i]){ %>
-          <div class="answer-choice" style="background-color: #e60e0e"><%= round_questions[questionNumber - 1].answerchoices[i] %></div>
-    <%    } else { %>
-        <div class="answer-choice"><%= round_questions[questionNumber - 1].answerchoices[i] %></div>
+          <span class="answer-choice" style="background-color: #9c0000"><%= round_questions[questionNumber - 1].answerchoices[i] %></span>
+    <%    } else if(correct_answer == round_questions[questionNumber - 1].answerchoices[i]){ %>
+          <span class="answer-choice" style="background-color: #0e8a00"><%= round_questions[questionNumber - 1].answerchoices[i] %></span>
+
+    <% } else { %>
+        <span class="answer-choice"><%= round_questions[questionNumber - 1].answerchoices[i] %></span>
     <%  } %>
     <%  }%>
 
@@ -57,10 +41,6 @@
 
     <% } %>
 
-    <% if(selected_answer != correct_answer){ %>
-      <div class="correct-answer">The correct answer is: <%= correct_answer %></div>
-    <% } %>
-
   </div>
 
 
@@ -68,15 +48,20 @@
     <!-- if we have not reached the end of the quiz, then go to the next question,
     otherwise, submit the quiz  -->
 
-  <%  if(questionNumber < 10){ %>
+  <%  if(questionNumber < round_questions.length){ %>
 
       <form action="/quizquestions/<%= questionNumber %>" method="post">
-        <button type="submit" name="button" class="next-button">Next Question</button>
+        <input type="hidden" name="score" value="<%= score %>">
+        <button type="submit" name="button" class="submit-button">Next Question</button>
 
       </form>
 
   <%  } else { %>
-        <a href="/quizscore"><button type="submit" name="button" class="submit-button">Submit</button></a>
+    <form action="/quizscore" method="post">
+      <input type="hidden" name="score" value="<%= score %>">
+<button type="submit" name="button" class="submit-button">Submit</button>
+      </form>
+
 
 
   <%  } %>
