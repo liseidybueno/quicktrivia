@@ -6,7 +6,7 @@ const constants = require("./constants.js");
 const home = require('./routes/home');
 const quizquestions = require('./routes/quiz/quizquestions');
 const quizresults = require('./routes/quiz/quizresults');
-const score = require('./routes/quiz/score');
+const score = require('./routes/quizscore');
 const register = require('./routes/user/register');
 const login = require('./routes/user/login');
 const resetpw = require('./routes/user/resetpw');
@@ -41,6 +41,11 @@ app.use('/', createnewpw);
 
 app.use('/', emailwpw);
 
-app.listen(process.env.PORT || 5000, function() {
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
+
+app.listen(port, function() {
   console.log("Server started successfully.");
 });
