@@ -158,6 +158,10 @@ router.post("/register-get", function(req, res) {
                               connection.query(stmt, userinfo, (err, result, fields) => {
                                 if (err) {
                                   return console.error(err.message);
+                                  res.send({
+                                    redirect: true,
+                                    redirect_url: ('home')
+                                  });
                                 } else {
                                   console.log("Inserted into DB");
                                   res.send({
