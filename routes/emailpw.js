@@ -29,8 +29,8 @@ router.post("/emailpw", function(req, res) {
     var transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'liseidybueno@gmail.com',
-        pass: 'abc123xyz321'
+        user: process.env.EMAIL,
+        pass: process.env.EMAIL_PW
       }
     });
 

@@ -6,7 +6,8 @@
   </div>
 
 <div id="error_msg"></div>
-  <form class="registration-form" id="registerform">
+  <div class="registration-form">
+
     <input class="top" type="text" id="fname" name="fname" placeholder="First Name" />
     <input class="middle" type="text" id="username" name="username" placeholder="Username" />
     <input class="middle" type="email" id="email" name="email" placeholder="Email" />
@@ -20,16 +21,20 @@
       <option value="5">What is your mother's middle name?</option>
     </select>
     <input type="text" id="sec_answer" class="bottom" name="security_answer" placeholder="Answer">
-    <button class="register-button" type="submit" name="button">Register</button>
-  </form>
+    <button class="register-button" id="registerform" type="submit" name="button">Register</button>
+  </div>
+
+    <p>
+      <a class="register-link" href="/">Back to Home</a>
+    </p>
 
 
   <script type="text/javascript">
 
-    $("#registerform").submit(function(e) {
+    $("#registerform").click(function(e) {
       e.preventDefault();
       $.ajax({
-        url: "/register-get",
+        url: "/register",
         type: "POST",
         data: {
           fname: document.getElementById("fname").value,
@@ -87,11 +92,6 @@
       });
     });
   </script>
-
-
-  <p>
-    <a class="register-link" href="/">Back to Home</a>
-  </p>
 
 </div>
 

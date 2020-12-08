@@ -7,18 +7,18 @@
   </div>
 
   <div id="error_msg"></div>
-    <form class="reset-form" id="createnewpw">
+<div class="login-form">
       <input type="text" class="top" id="username" name="username" placeholder="Username" />
       <input class="middle" type="password" id="newpw" name="newpw" placeholder="New Password" />
       <input class="bottom" type="password" id="confirmpw" name="confirmpw" placeholder="Confirm Password" />
         <button class="register-button" type="submit" id="submitnewpw" name="button">Submit</button>
-      </form>
+      </div>
 
       </div>
 
       <script type="text/javascript">
 
-        $("#createnewpw").submit(function(e) {
+        $("submitnewpw").click(function(e) {
           e.preventDefault();
           $.ajax({
             url: "/createnew",

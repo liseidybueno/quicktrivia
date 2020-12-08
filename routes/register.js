@@ -15,7 +15,7 @@ router.get("/register", function(req, res) {
   });
 });
 
-router.post("/register-get", function(req, res) {
+router.post("/register", function(req, res) {
 
   const username = req.body.username;
   const fname = req.body.fname;

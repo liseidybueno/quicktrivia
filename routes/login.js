@@ -10,7 +10,6 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 router.get("/login", function(req, res) {
-    console.log("Welcome to login page");
 
   res.render("login", {
     curr_user: constants.curr_user
@@ -28,7 +27,9 @@ router.post("/login", function(req, res) {
 
   //look for username
   sql.query(user_stmt, username, (err, result, fields) => {
-    if (!err) {
+    if(err){
+      console.log(err);
+    }else if (!err) {
       console.log("Look for username");
       //if there is no error, check if the username exists
       //if it exists, then get the fname and make sure the password is correct
