@@ -36,6 +36,8 @@ app.use('/', register);
 
 app.use('/', login);
 
+app.use('/', loginpost);
+
 app.use('/', resetpw);
 
 app.use('/', createnewpw);
