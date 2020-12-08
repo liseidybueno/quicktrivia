@@ -13,8 +13,8 @@ router.post("/login/loginpost", function(req, res) {
 
 
 
-  // const username = req.body.username;
-  // const password = req.body.password;
+  const username = "";
+  const password = "";
   var fname = "";
   var total_score = "";
 
