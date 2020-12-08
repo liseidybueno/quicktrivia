@@ -9,11 +9,11 @@
 
 
     <div id="login-error"></div>
-      <form class="login-form" id="loginform">
+      <!-- <form class="login-form" id="loginform"> -->
         <input class="top" type="text" id="username" name="username" placeholder="Username"/>
         <input class="bottom" type="password" id="password" name="password" placeholder="Password">
 
-        <button class="login-button" type="submit" name="button">Log In</button>
+        <button class="login-button" id="loginbutton" name="button">Log In</button>
         <p>
           <a class="register-link" href="/register">Register</a>
           </p>
@@ -25,12 +25,12 @@
 
               </p>
 
-      </form>
+      <!-- </form> -->
       </div>
 
       <script type="text/javascript">
 
-        $("#loginform").submit(function(e) {
+        $("#loginbutton").onclick(function(e) {
           e.preventDefault();
           $.ajax({
             url: "https://quicktrivia.herokuapp.com/login",
