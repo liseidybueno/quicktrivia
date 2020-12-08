@@ -10,6 +10,8 @@
 
     <div id="login-error"></div>
       <!-- <form class="login-form" id="loginform"> -->
+      <div class="login-form">
+
         <input class="top" type="text" id="username" name="username" placeholder="Username"/>
         <input class="bottom" type="password" id="password" name="password" placeholder="Password">
 
@@ -24,16 +26,16 @@
               Forgot password? <a class="register-link" href="/resetpassword">Reset Password</a>
 
               </p>
-
+  </div>
       <!-- </form> -->
       </div>
 
       <script type="text/javascript">
 
-        $("#loginbutton").onclick(function(e) {
+        $("#loginbutton").click(function(e) {
           e.preventDefault();
           $.ajax({
-            url: "https://quicktrivia.herokuapp.com/login",
+            url: "/login",
             type: "POST",
             data: {
               username: document.getElementById("username").value,
