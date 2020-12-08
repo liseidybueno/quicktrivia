@@ -11,10 +11,11 @@ const saltRounds = 10;
 
 router.post("/login/loginpost", function(req, res) {
 
+  console.log("POST REQUEST SUCCESFUL");
 
 
-  const username = "";
-  const password = "";
+    const username = req.body.username;
+    const password = req.body.password;
   var fname = "";
   var total_score = "";
 
