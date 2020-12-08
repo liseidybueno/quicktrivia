@@ -92,14 +92,14 @@ router.post("/login/loginpost", function(req, res) {
   });
 
 });
-
-router.get("/logout", function(req, res) {
-  constants.curr_user = {
-    username: "",
-    fname: "",
-    total_score: ""
-  }
-  res.redirect("/");
-});
+// 
+// router.get("/logout", function(req, res) {
+//   constants.curr_user = {
+//     username: "",
+//     fname: "",
+//     total_score: ""
+//   }
+//   res.redirect("/");
+// });
 
 module.exports = router;
