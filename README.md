@@ -1,6 +1,6 @@
 <p align="center">
 
-  <h3 align="center">QUCIK TRIVIA</h3>
+  <h3 align="center">QUICK TRIVIA</h3>
 
   <p align="center">
     Quick Trivia is a trivia app that uses an API from opentdb.com to search for questions and create a quiz in different categories from 5-20 questions. Users can create profiles to receive an overall rank for all quizzes they take.
