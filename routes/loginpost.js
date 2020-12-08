@@ -11,8 +11,10 @@ const saltRounds = 10;
 
 router.post("/login/loginpost", function(req, res) {
 
-  const username = req.body.username;
-  const password = req.body.password;
+
+
+  // const username = req.body.username;
+  // const password = req.body.password;
   var fname = "";
   var total_score = "";
 
@@ -92,7 +94,7 @@ router.post("/login/loginpost", function(req, res) {
   });
 
 });
-// 
+//
 // router.get("/logout", function(req, res) {
 //   constants.curr_user = {
 //     username: "",
