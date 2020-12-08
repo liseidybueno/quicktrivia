@@ -35,6 +35,7 @@ router.post("/register-get", function(req, res) {
   //if empty, send message to client
   if (fname == "") {
     var fname_empty = "Please enter your name.";
+    console.log("First name is empty");
     res.send({
       empty: fname_empty
     });
