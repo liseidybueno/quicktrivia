@@ -2,11 +2,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var mysql = require("mysql");
 const nodemailer = require('nodemailer');
-let config = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
+const sql = require("./../config.js");
 const constants = require("./../constants.js");
 const router = express.Router();
 
@@ -20,7 +18,7 @@ router.post("/emailpw", function(req, res) {
   var fname = "";
   var email = "";
 
-  connection.query(email_query, username, (err, result, fields) => {
+  sql.query(email_query, username, (err, result, fields) => {
     if (!err) {
       email = result[0].email,
         fname = result[0].fname

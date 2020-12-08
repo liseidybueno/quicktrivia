@@ -1,10 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var mysql = require("mysql");
-let config = require("./../config.js");
+const sql = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
 const constants = require("./../constants.js");
 const router = express.Router();
 
@@ -22,7 +20,7 @@ router.post("/quizscore", function(req, res) {
     var get_score = "SELECT * FROM USERS WHERE username = ?";
 
     //find the score in the database
-    connection.query(get_score, constants.curr_user.username, (error, results, fields) => {
+    sql.query(get_score, constants.curr_user.username, (error, results, fields) => {
       if (!error) {
 
         var total_questions = "";
@@ -51,7 +49,7 @@ router.post("/quizscore", function(req, res) {
 
         var insert_score_info = [new_total_questions, new_correct, constants.curr_user.username];
 
-        connection.query(insert_score, insert_score_info, (error, results, fields) => {
+        sql.query(insert_score, insert_score_info, (error, results, fields) => {
           if (!error) {
             console.log("Inserted");
 
@@ -67,13 +65,13 @@ router.post("/quizscore", function(req, res) {
             //check if the username exists first
             var checkUser = "SELECT * FROM SCORES WHERE USERNAME = ?";
 
-            connection.query(checkUser, constants.curr_user.username, (error, results, fields) => {
+            sql.query(checkUser, constants.curr_user.username, (error, results, fields) => {
               if (!error) {
                 if (results.length > 0) {
                   //the username already exists in the table, so update
                   var update_score = "UPDATE SCORES SET total_score = ? WHERE username = ?";
                   var update_score_info = [total_score, constants.curr_user.username];
-                  connection.query(update_score, update_score_info, (error, results, fields) => {
+                  sql.query(update_score, update_score_info, (error, results, fields) => {
                     if (!error) {
                       console.log("Score udpated in DB");
                     }
@@ -84,7 +82,7 @@ router.post("/quizscore", function(req, res) {
 
                   var insert_score_table_info = [constants.curr_user.username, total_score];
 
-                  connection.query(insert_score_table, insert_score_table_info, (error, results, fields) => {
+                  sql.query(insert_score_table, insert_score_table_info, (error, results, fields) => {
                     if (!error) {
                       console.log("Inserted score into DB");
                     }
@@ -94,7 +92,7 @@ router.post("/quizscore", function(req, res) {
 
               var scoreboard_query = "SELECT * FROM SCORES";
 
-              connection.query(scoreboard_query, (error, results, fields) => {
+              sql.query(scoreboard_query, (error, results, fields) => {
                 var score_array = lib.createScoreboard(results);
 
                 //sort array by score
@@ -121,7 +119,7 @@ router.post("/quizscore", function(req, res) {
   } else {
     var scoreboard_query = "SELECT * FROM SCORES";
 
-    connection.query(scoreboard_query, (error, results, fields) => {
+    sql.query(scoreboard_query, (error, results, fields) => {
       var score_array = lib.createScoreboard(results);
 
       //sort array by score

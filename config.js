@@ -5,6 +5,7 @@
 //   database: 'triviaquizdb'
 // };
 // module.exports = config;
+var mysql = require("mysql");
 
 let config = {
   host: "us-cdbr-east-02.cleardb.com",
@@ -13,4 +14,11 @@ let config = {
   database: "heroku_33b59430916aed3"
 };
 
-module.exports = config;
+const connection = mysql.createConnection(config);
+
+connection.connect(error => {
+  if(error) throw error;
+  console.log("Successfully connected to the database.");
+});
+
+module.exports = connection;

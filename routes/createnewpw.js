@@ -2,10 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var mysql = require("mysql");
-let config = require("./../config.js");
+const sql = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
 const constants = require("./../constants.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -75,12 +73,12 @@ router.post("/createnew", function(req, res) {
               var update_password = "UPDATE USERS SET password = ? WHERE username = ?";
 
               var update_pw_info = [hash, username];
-              connection.query(update_password, update_pw_info, (err, result, fields) => {});
+              sql.query(update_password, update_pw_info, (err, result, fields) => {});
 
               //get the username, first name and score of the user and update the global variables
               var get_user_info = "SELECT * FROM USERS WHERE username = ?";
 
-              connection.query(get_user_info, username, (err, result, fields) => {
+              sql.query(get_user_info, username, (err, result, fields) => {
                 constants.curr_user.fname = result[0].fname;
                 constants.curr_user.username = result[0].username;
 

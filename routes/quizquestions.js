@@ -4,10 +4,7 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const https = require("https");
 const Entities = require("html-entities").AllHtmlEntities;
-var mysql = require("mysql");
-let config = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
 const constants = require("./../constants.js");
 const router = express.Router();
 

@@ -2,10 +2,8 @@
 const constants = require("./../constants.js");
 const express = require("express");
 const ejs = require("ejs");
-var mysql = require("mysql");
-let config = require("./../config.js");
+const sql = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
 const router = express.Router();
 
   //landing page
@@ -22,7 +20,7 @@ router.get("/", function(req, res) {
 
     var scoreboard_query = "SELECT * FROM SCORES";
 
-    connection.query(scoreboard_query, (error, results, fields) => {
+    sql.query(scoreboard_query, (error, results, fields) => {
       var score_array = lib.createScoreboard(results);
 
       //sort array by score

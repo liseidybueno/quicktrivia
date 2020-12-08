@@ -2,10 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var mysql = require("mysql");
-let config = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
+const sql = require("./../config.js");
 const constants = require("./../constants.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -27,7 +25,7 @@ router.post("/login-get", function(req, res) {
   let user_stmt = "SELECT * FROM USERS WHERE username=?";
 
   //look for username
-  connection.query(user_stmt, username, (err, result, fields) => {
+  sql.query(user_stmt, username, (err, result, fields) => {
     if (!err) {
       //if there is no error, check if the username exists
       //if it exists, then get the fname and make sure the password is correct
@@ -45,7 +43,7 @@ router.post("/login-get", function(req, res) {
             var score_stmt = "SELECT * FROM SCORES WHERE username = ?";
 
 
-            connection.query(score_stmt, username, (err, result, fields) => {
+            sql.query(score_stmt, username, (err, result, fields) => {
               if (!err) {
                 //if the score exists, save it
                 if (result.length > 0) {

@@ -2,10 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var mysql = require("mysql");
-let config = require("./../config.js");
 const lib = require('./../index.js');
-const connection = mysql.createConnection(config);
+const sql = require("./../config.js");
 const constants = require("./../constants.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -51,7 +49,7 @@ router.post("/register-get", function(req, res) {
     } else {
 
       //if first name is entered, search for username in database
-      connection.query(user_stmt, username, (err, result, fields) => {
+      sql.query(user_stmt, username, (err, result, fields) => {
         if (!err) {
           //if the user name exists, send a message that it exists
           if (result.length > 0) {
@@ -95,7 +93,7 @@ router.post("/register-get", function(req, res) {
                 //if the email is not empty, check if it's already in the DB
                 var email_stmt = "SELECT * FROM USERS WHERE email = ?";
 
-                connection.query(email_stmt, email, (err, result, fields) => {
+                sql.query(email_stmt, email, (err, result, fields) => {
                   if (!err) {
                     //if the email exists, send a message that it exists
                     if (result.length > 0) {
@@ -149,7 +147,7 @@ router.post("/register-get", function(req, res) {
 
                               let userinfo = [fname, sec_quest_id, hash, username, security_answer, email];
 
-                              connection.query(stmt, userinfo, (err, result, fields) => {
+                              sql.query(stmt, userinfo, (err, result, fields) => {
                                 if (err) {
                                   return console.error(err.message);
                                 } else {

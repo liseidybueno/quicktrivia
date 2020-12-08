@@ -2,10 +2,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-var mysql = require("mysql");
-let config = require("./../config.js");
+const sql = require("./../config.js");
 const lib = require('./../index.js');
-let connection = mysql.createConnection(config);
 const constants = require("./../constants.js");
 const router = express.Router();
 const bcrypt = require("bcrypt");
@@ -25,7 +23,7 @@ router.post("/reset-get", function(req, res) {
   //look for the security question # associated with the username in the DB
   const username_query = "SELECT * FROM USERS WHERE username = ?";
 
-  connection.query(username_query, username, (err, result, fields) => {
+  sql.query(username_query, username, (err, result, fields) => {
     if (!err) {
       //if the username exists, then get the security question number
       if (result.length > 0) {
@@ -33,7 +31,7 @@ router.post("/reset-get", function(req, res) {
 
         //look for the security question in the security questions table
         const question_query = "SELECT * FROM SECQUEST WHERE idSECQUEST = ?";
-        connection.query(question_query, security_question_num, (err, result, fields) => {
+        sql.query(question_query, security_question_num, (err, result, fields) => {
           if (!err) {
             //send the question
             var security_question = result[0].question;
@@ -65,7 +63,7 @@ router.post("/reset-sec-get", function(req, res) {
   //look for the username in the database and check to see if the security answer is the same
   var security_query = "SELECT * FROM USERS WHERE username = ?";
 
-  connection.query(security_query, username, (err, result, fields) => {
+  sql.query(security_query, username, (err, result, fields) => {
     if (!err) {
       //get the security answer from the db
       var correct_answer = result[0].securityanswer;
