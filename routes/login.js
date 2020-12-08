@@ -17,7 +17,7 @@ router.get("/login", function(req, res) {
   });
 });
 
-router.post("/login-get", function(req, res) {
+router.post("/login", function(req, res) {
 
   const username = req.body.username;
   const password = req.body.password;

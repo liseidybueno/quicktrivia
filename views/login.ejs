@@ -33,7 +33,7 @@
         $("#loginform").submit(function(e) {
           e.preventDefault();
           $.ajax({
-            url: "https://quicktrivia.herokuapp.com/login/login-get",
+            url: "login",
             type: "POST",
             data: {
               username: document.getElementById("username").value,
