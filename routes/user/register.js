@@ -5,7 +5,12 @@ const ejs = require("ejs");
 var mysql = require("mysql");
 let config = require("./../../config.js");
 const lib = require('./../../index.js');
-let connection = mysql.createConnection(config);
+const connection = mysql.createConnection({
+  host: config.HOST,
+  user: config.USER,
+  password: config.PASSWORD,
+  database: config.DB
+});
 const constants = require("./../../constants.js");
 const home = require("./../home.js")
 const router = express.Router();
@@ -156,10 +161,9 @@ router.post("/register-get", function(req, res) {
                                   return console.error(err.message);
                                 } else {
                                   console.log("Inserted into DB");
-                                  router.get("/")
                                   res.send({
                                     redirect: true,
-                                    redirect_url: "/home"
+                                    redirect_url: "/"
                                   });
                                 }
                               });
