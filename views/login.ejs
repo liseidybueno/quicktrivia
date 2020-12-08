@@ -40,7 +40,7 @@
               password: document.getElementById("password").value,
             },
             success: function(returned_data){
-              // alert(returned_data.login_error);
+              console.log("AJAX WORKS");
               if (returned_data.redirect) {
                   window.location.href = returned_data.redirect_url;
                 } else {
