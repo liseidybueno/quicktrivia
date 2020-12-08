@@ -9,7 +9,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-router.post("/loginpost", function(req, res) {
+router.post("/login/loginpost", function(req, res) {
 
   const username = req.body.username;
   const password = req.body.password;
