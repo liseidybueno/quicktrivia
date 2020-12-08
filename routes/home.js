@@ -53,6 +53,10 @@ router.get("/", function(req, res) {
 
   });
 
+  router.get("/home", function(req, res){
+    res.redirect("/");
+  });
+
 
   //main page post to keep current username
 router.post("/", function(req, res) {
