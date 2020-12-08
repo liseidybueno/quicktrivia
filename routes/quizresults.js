@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
-const lib = require('./../../index.js');
-const constants = require("./../../constants.js");
+const lib = require('./../index.js');
+const constants = require("./../constants.js");
 const router = express.Router();
 
 

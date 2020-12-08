@@ -3,16 +3,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 var mysql = require("mysql");
-let config = require("./../../config.js");
-const lib = require('./../../index.js');
+let config = require("./../config.js");
+const lib = require('./../index.js');
 const connection = mysql.createConnection({
   host: config.HOST,
   user: config.USER,
   password: config.PASSWORD,
   database: config.DB
 });
-const constants = require("./../../constants.js");
-const home = require("./../home.js")
+const constants = require("./../constants.js");
+const home = require("./home.js")
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -160,10 +160,6 @@ router.post("/register-get", function(req, res) {
                               connection.query(stmt, userinfo, (err, result, fields) => {
                                 if (err) {
                                   return console.error(err.message);
-                                  res.send({
-                                    redirect: true,
-                                    redirect_url: ('home')
-                                  });
                                 } else {
                                   console.log("Inserted into DB");
                                   res.send({

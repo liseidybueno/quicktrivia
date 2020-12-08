@@ -4,14 +4,14 @@ const bodyParser = require("body-parser");
 const lib = require('./index.js');
 const constants = require("./constants.js");
 const home = require('./routes/home');
-const quizquestions = require('./routes/quiz/quizquestions');
-const quizresults = require('./routes/quiz/quizresults');
-const score = require('./routes/quiz/score');
-const register = require('./routes/user/register');
-const login = require('./routes/user/login');
-const resetpw = require('./routes/user/resetpw');
-const createnewpw = require('./routes/user/createnewpw');
-const emailwpw = require('./routes/user/emailpw');
+const quizquestions = require('./routes/quizquestions');
+const quizresults = require('./routes/quizresults');
+const score = require('./routes/score');
+const register = require('./routes/register');
+const login = require('./routes/login');
+const resetpw = require('./routes/resetpw');
+const createnewpw = require('./routes/createnewpw');
+const emailwpw = require('./routes/emailpw');
 
 const app = express();
 
