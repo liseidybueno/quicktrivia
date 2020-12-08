@@ -15,7 +15,7 @@ router.get("/resetpassword", function(req, res) {
   });
 });
 
-router.post("/reset-get", function(req, res) {
+router.post("/resetpassword", function(req, res) {
   //get the username entered
   const username = req.body.username;
   var error_msg = "";
@@ -51,7 +51,7 @@ router.post("/reset-get", function(req, res) {
   });
 });
 
-router.post("/reset-sec-get", function(req, res) {
+router.post("/reset-sec", function(req, res) {
   //get the security answer  and username
   const security_answer = req.body.sec_answer;
   const username = req.body.username;
