@@ -5,14 +5,8 @@ const ejs = require("ejs");
 var mysql = require("mysql");
 let config = require("./../config.js");
 const lib = require('./../index.js');
-const connection = mysql.createConnection({
-  host: config.HOST,
-  user: config.USER,
-  password: config.PASSWORD,
-  database: config.DB
-});
+const connection = mysql.createConnection(config);
 const constants = require("./../constants.js");
-const home = require("./home.js")
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
