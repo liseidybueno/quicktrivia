@@ -12,6 +12,7 @@ const login = require('./routes/login');
 const resetpw = require('./routes/resetpw');
 const createnewpw = require('./routes/createnewpw');
 const emailwpw = require('./routes/emailpw');
+const loginpost = require('./routes/loginpost');
 require('dotenv').config();
 
 const app = express();
