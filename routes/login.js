@@ -11,7 +11,7 @@ const saltRounds = 10;
 
 router.get("/login", function(req, res) {
     console.log("Welcome to login page");
-    
+
   res.render("login", {
     curr_user: constants.curr_user
   });
