@@ -7,6 +7,7 @@ let config = require("./../../config.js");
 const lib = require('./../../index.js');
 let connection = mysql.createConnection(config);
 const constants = require("./../../constants.js");
+const home = require("./../home.js")
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
@@ -157,7 +158,7 @@ router.post("/register-get", function(req, res) {
                                   console.log("Inserted into DB");
                                   res.send({
                                     redirect: true,
-                                    redirect_url: "/"
+                                    redirect_url: "home, /"
                                   });
                                 }
                               });
