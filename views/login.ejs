@@ -35,7 +35,7 @@
         $("#loginbutton").click(function(e) {
           e.preventDefault();
           $.ajax({
-            url: "/loginpost",
+            url: window.location.href + '/loginpost' ,
             type: "POST",
             data: {
               username: document.getElementById("username").value,
