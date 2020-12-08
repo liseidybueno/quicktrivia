@@ -9,7 +9,7 @@
 
 
     <div id="login-error"></div>
-      <!-- <form class="login-form" id="loginform"> -->
+
       <div class="login-form">
 
         <input class="top" type="text" id="username" name="username" placeholder="Username"/>
@@ -27,7 +27,7 @@
 
               </p>
   </div>
-      <!-- </form> -->
+
       </div>
 
       <script type="text/javascript">
@@ -35,14 +35,13 @@
         $("#loginbutton").click(function(e) {
           e.preventDefault();
           $.ajax({
-            url: "https://quicktrivia.herokuapp.com/login",
+            url: "/login",
             type: "POST",
             data: {
               username: document.getElementById("username").value,
               password: document.getElementById("password").value,
             },
             success: function(returned_data){
-              console.log("AJAX WORKS");
               if (returned_data.redirect) {
                   window.location.href = returned_data.redirect_url;
                 } else {
