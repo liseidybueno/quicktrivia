@@ -13,6 +13,8 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 
+router.use('/', home);
+
 router.get("/register", function(req, res) {
   res.render("register", {
     curr_user: constants.curr_user
@@ -158,7 +160,7 @@ router.post("/register-get", function(req, res) {
                                   console.log("Inserted into DB");
                                   res.send({
                                     redirect: true,
-                                    redirect_url: "home, /"
+                                    redirect_url: "/"
                                   });
                                 }
                               });
