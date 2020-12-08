@@ -10,6 +10,8 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 router.get("/login", function(req, res) {
+    console.log("Welcome to login page");
+    
   res.render("login", {
     curr_user: constants.curr_user
   });
@@ -21,8 +23,6 @@ router.post("/login-get", function(req, res) {
   const password = req.body.password;
   var fname = "";
   var total_score = "";
-
-  console.log("Welcome to login page");
 
   let user_stmt = "SELECT * FROM USERS WHERE username=?";
 
