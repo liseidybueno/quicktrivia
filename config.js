@@ -14,7 +14,7 @@ let config = {
   database: "heroku_33b59430916aed3"
 };
 
-const connection = mysql.createConnection(config);
+const connection = mysql.createPool(config);
 
 connection.connect(error => {
   if(error) throw error;
