@@ -18,6 +18,10 @@ router.post("/loginpost", function(req, res) {
 
   let user_stmt = "SELECT * FROM USERS WHERE username=?";
 
+  if(username == ""){
+    var login_error = "Username not found. Please enter a valid username or register.";
+    res.render("login", {curr_user: constants.curr_user, login_error: login_error});
+  } else {
   //look for username
   sql.query(user_stmt, username, (err, result, fields) => {
     if(err){
@@ -92,7 +96,7 @@ router.post("/loginpost", function(req, res) {
     }
 
   });
-
+}
 });
 
 module.exports = router;
