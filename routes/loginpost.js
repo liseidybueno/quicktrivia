@@ -16,7 +16,6 @@ router.post("/loginpost", function(req, res) {
       var fname = "";
       var total_score = "";
 
-      let user_stmt = "SELECT * FROM USERS WHERE username=?";
 
       if (username == "") {
         //username is blank
@@ -26,11 +25,12 @@ router.post("/loginpost", function(req, res) {
           login_error: login_error
         });
       } else { //else if it is not blank
-        //look for username
+        let user_stmt = "SELECT password, fname FROM USERS WHERE username=?";
+        //look for username & pw
         sql.query(user_stmt, username, (err, result, fields) => {
             if (err) {
               console.log(err);
-            } else if (!err) {
+            } else {
               //if the username exists, then see if passwords match
               if (result.length > 0) {
                 fname = result[0].fname;
