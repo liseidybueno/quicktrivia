@@ -10,9 +10,10 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 router.get("/login", function(req, res) {
-
+  var login_error = "";
   res.render("login", {
-    curr_user: constants.curr_user
+    curr_user: constants.curr_user,
+    login_error: login_error
   });
 });
 
