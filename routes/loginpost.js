@@ -9,13 +9,10 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
-router.post("/login/loginpost", function(req, res) {
+router.post("/loginpost", function(req, res) {
 
-  console.log("POST REQUEST SUCCESFUL");
-
-
-    const username = req.body.username;
-    const password = req.body.password;
+  const username = req.body.username;
+  const password = req.body.password;
   var fname = "";
   var total_score = "";
 

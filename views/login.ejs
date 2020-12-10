@@ -15,7 +15,7 @@
         <input class="top" type="text" id="username" name="username" placeholder="Username"/>
         <input class="bottom" type="password" id="password" name="password" placeholder="Password">
 
-        <button class="login-button" id="loginbutton" name="button">Log In</button>
+        <button class="login-button" id="loginbutton" type="submit">Log In</button>
         <p>
           <a class="register-link" href="/register">Register</a>
           </p>
@@ -31,11 +31,10 @@
       </div>
 
       <script type="text/javascript">
-
         $("#loginbutton").click(function(e) {
           e.preventDefault();
           $.ajax({
-            url: window.location.href + '/loginpost' ,
+            url: '/loginpost' ,
             type: "POST",
             data: {
               username: document.getElementById("username").value,
