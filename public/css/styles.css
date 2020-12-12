@@ -363,7 +363,7 @@ Question Page */
   color: #f2f2f2;
 }
 
-#error_msg, #login-error {
+.error_msg {
   font-size: .8rem;
   margin-bottom: 2%;
 }

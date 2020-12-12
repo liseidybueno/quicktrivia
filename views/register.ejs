@@ -5,8 +5,15 @@
     <h2>Register</h2>
   </div>
 
-<div id="error_msg"></div>
+<div class="error_msg">
+  <% for(var i = 0; i < register_error.length; i++){ %>
+    <p>
+      <%= register_error[i]; %>
+      </p>
+  <% } %>
+</div>
   <div class="registration-form">
+<form class="" action="/register" method="post">
 
     <input class="top" type="text" id="fname" name="fname" placeholder="First Name" />
     <input class="middle" type="text" id="username" name="username" placeholder="Username" />
@@ -22,13 +29,14 @@
     </select>
     <input type="text" id="sec_answer" class="bottom" name="security_answer" placeholder="Answer">
     <button class="register-button" id="registerform" type="submit" name="button">Register</button>
+    </form>
   </div>
 
     <p>
       <a class="register-link" href="/">Back to Home</a>
     </p>
 
-
+<!--
   <script type="text/javascript">
 
     $("#registerform").click(function(e) {
@@ -91,7 +99,7 @@
         }
       });
     });
-  </script>
+  </script> -->
 
 </div>
 
