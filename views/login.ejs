@@ -11,12 +11,12 @@
     <div id="login-error"><%= login_error %></div>
 
       <div class="login-form">
-<form class="" action="/loginpost" method="post">
+<!-- <form class="" action="/loginpost" method="post"> -->
   <input class="top" type="text" id="username" name="username" placeholder="Username"/>
   <input class="bottom" type="password" id="password" name="password" placeholder="Password">
 
   <button class="login-button" id="loginbutton" type="submit">Log In</button>
-</form>
+<!-- </form> -->
 
         <p>
           <a class="register-link" href="/register">Register</a>
@@ -34,60 +34,32 @@
 
       <script type="text/javascript">
 
-      // var location = "http://localhost:8000";
-
-        // function login(e){
-        //   $.ajax({
-        //     e.preventDefault();
-        //     // global: true,
-        //     url: '/loginpost' ,
-        //     type: "POST",
-        //     data: {
-        //       username: document.getElementById("username").value,
-        //       password: document.getElementById("password").value,
-        //     },
-        //     success: function(returned_data){
-        //       if (returned_data.redirect) {
-        //           window.location.href = returned_data.redirect_url;
-        //         } else {
-        //       var div = document.getElementById('login-error');
-        //       div.innerHTML = "";
-        //       var para = document.createElement("p");
-        //       var msg = document.createTextNode(returned_data.login_error);
-        //       para.appendChild(msg);
-        //       div.appendChild(para);
-        //       document.getElementById("password").value = "";
-        //     }
-        //     }
-        //   });
-        // }
-
-        // $("#loginbutton").click(function(e) {
-        //   var location = "http://localhost:8000";
-        //   e.preventDefault();
-        //   $.ajax({
-        //     global: true,
-        //     url: location + '/loginpost' ,
-        //     type: "POST",
-        //     data: {
-        //       username: document.getElementById("username").value,
-        //       password: document.getElementById("password").value,
-        //     },
-        //     success: function(returned_data){
-        //       if (returned_data.redirect) {
-        //           window.location.href = returned_data.redirect_url;
-        //         } else {
-        //       var div = document.getElementById('login-error');
-        //       div.innerHTML = "";
-        //       var para = document.createElement("p");
-        //       var msg = document.createTextNode(returned_data.login_error);
-        //       para.appendChild(msg);
-        //       div.appendChild(para);
-        //       document.getElementById("password").value = "";
-        //     }
-        //     }
-        //   });
-        // });
+        $("#loginbutton").click(function(e) {
+          var location = "http://localhost:8000";
+          e.preventDefault();
+          $.ajax({
+            global: true,
+           url: '/loginpost',
+           type: "POST",
+          data: {
+               username: document.getElementById("username").value,
+              password: document.getElementById("password").value,
+          },
+           success: function(returned_data){
+             if (returned_data.redirect) {
+                window.location.href = returned_data.redirect_url;
+             } else {
+              var div = document.getElementById('login-error');
+              div.innerHTML = "";
+              var para = document.createElement("p");
+              var msg = document.createTextNode(returned_data.login_error);
+              para.appendChild(msg);
+              div.appendChild(para);
+              document.getElementById("password").value = "";
+          }
+            }
+        });
+     });
       </script>
 
 
