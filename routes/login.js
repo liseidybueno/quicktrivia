@@ -17,89 +17,91 @@ router.get("/login", function(req, res) {
   });
 });
 
-// router.post("/login", function(req, res) {
-//
-//   const username = req.body.username;
-//   const password = req.body.password;
-//   var fname = "";
-//   var total_score = "";
-//
-//   let user_stmt = "SELECT * FROM USERS WHERE username=?";
-//
-//   //look for username
-//   sql.query(user_stmt, username, (err, result, fields) => {
-//     if(err){
-//       console.log(err);
-//     }else if (!err) {
-//       console.log("Look for username");
-//       //if there is no error, check if the username exists
-//       //if it exists, then get the fname and make sure the password is correct
-//       if (result.length > 0) {
-//         fname = result[0].fname;
-//
-//         bcrypt.compare(password, result[0].password, function(err, result) {
-//           if (result === true) {
-//             //if the password is correct, store the username and first name in the
-//             //appropriate global variables
-//             constants.curr_user.username = username;
-//             constants.curr_user.fname = fname;
-//
-//             //then, look through the score table for the total score
-//             var score_stmt = "SELECT * FROM SCORES WHERE username = ?";
-//
-//
-//             sql.query(score_stmt, username, (err, result, fields) => {
-//               if (!err) {
-//                 //if the score exists, save it
-//                 if (result.length > 0) {
-//                   total_score = result[0].total_score;
-//
-//                   console.log("Password correct!");
-//
-//                   constants.curr_user.total_score = total_score;
-//
-//                   res.send({
-//                     redirect: true,
-//                     redirect_url: "/"
-//                   });
-//                 } else {
-//                   total_score = 0;
-//                   constants.curr_user.total_score = 0;
-//
-//                   res.send({
-//                     redirect: true,
-//                     redirect_url: "/"
-//                   });
-//                 }
-//               }
-//
-//             });
-//
-//           } else {
-//             constants.curr_user.username = "";
-//             constants.curr_user.fname = "";
-//             console.log("PW incorrect");
-//             const login_error = "Sorry, your password is incorrect. Please try again!";
-//             res.send({
-//               login_error: login_error
-//             });
-//           }
-//         }); //if it doesn't exist, then tell user their username is incorrect
-//       } else {
-//         constants.curr_user.username = "";
-//         constants.curr_user.fname = "";
-//         console.log("Username incorrect");
-//         const login_error = "Sorry, that username does not exist. Please try again!";
-//         res.send({
-//           login_error: login_error
-//         });
-//
-//       }
-//     }
-//
-//   });
-//
-// });
+router.post("/login", function(req, res) {
+
+      const username = req.body.username;
+      const password = req.body.password;
+      var fname = "";
+      var total_score = "";
+
+      if (username == "") {
+        //username is blank
+        var login_error = "Username not found. Please enter a valid username or register.";
+        // res.render("login", {
+        //   curr_user: constants.curr_user,
+        //   login_error: login_error
+        // });
+        res.send({
+          login_error: login_error
+        });
+      } else { //else if it is not blank
+        let user_stmt = "SELECT * FROM USERS WHERE username = ?";
+        console.log("login page username " + username);
+        //look for username & pw
+        sql.query(user_stmt, username, async (err, result, fields) => {
+          if(err){
+            var login_error = "This username or password does not exist. Please try again or register.";
+            // res.render("login", {
+            //   curr_user: constants.curr_user,
+            //   login_error: login_error
+            // });
+            res.send({
+              login_error: login_error
+            });
+          } else {
+            console.log("Length: " + result.length);
+            if(result.length > 0){
+              const comparison = await bcrypt.compare(password, result[0].password);
+              if(comparison){
+                constants.curr_user.username = username;
+                constants.curr_user.fname = result[0].fname;
+
+                const total_questions = Number(result[0].totalquestions);
+                const correct = Number(result[0].correct);
+
+                const total_score = Math.round((correct / total_questions) * 100);
+
+                constants.curr_user.total_score = total_score;
+
+                // const url = "/";
+                //
+                // if(process.env.PORT != null || process.env.PORT != ""){
+                //   const url = "https://quicktrivia.herokuapp.com/";
+                // }
+                //
+                // res.redirect(url);
+                res.send({
+                  redirect: true,
+                  redirect_url: ('/')
+                });
+              } else {
+                var login_error = "Username and password do not match.";
+                // res.render("login", {
+                //   curr_user: constants.curr_user,
+                //   login_error: login_error
+                // });
+                res.send({
+                  login_error: login_error
+                });
+              }
+            } else {
+              var login_error = "Username does not exist.";
+              // res.render("login", {
+              //   curr_user: constants.curr_user,
+              //   login_error: login_error
+              // });
+              res.send({
+                login_error: login_error
+              });
+            }
+          }
+        });
+
+
+      }
+
+      });
+
 
 router.get("/logout", function(req, res) {
   constants.curr_user = {
