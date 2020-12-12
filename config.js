@@ -2,10 +2,10 @@ require('dotenv').config();
 var mysql = require("mysql");
 
 var connection = mysql.createPool({
-  host: process.env.REMOTE_HOST,
-  user: process.env.REMOTE_USER,
-  password: process.env.REMOTE_PW,
-  database: process.env.REMOTE_DB
+  host: "us-cdbr-east-02.cleardb.com",
+  user: "b02f444a30ab24",
+  password: "84e47103",
+  database: "heroku_33b59430916aed3"
 });
 
 module.exports = connection;
