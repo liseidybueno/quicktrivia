@@ -36,7 +36,6 @@ router.post("/loginpost", function(req, res) {
           } else {
             if(result.length > 0){
               const comparison = await bcrypt.compare(password, result[0].password);
-              console.log(comparison);
               if(comparison){
                 constants.curr_user.username = username;
                 constants.curr_user.fname = result[0].fname;
@@ -53,7 +52,7 @@ router.post("/loginpost", function(req, res) {
 
                 constants.curr_user.total_score = total_score;
 
-                res.redirect("/");
+                res.redirect("./home/");
               } else {
                 var login_error = "Username and password do not match.";
                 res.render("login", {
