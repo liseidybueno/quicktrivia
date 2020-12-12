@@ -25,8 +25,9 @@ router.post("/loginpost", function(req, res) {
         });
       } else { //else if it is not blank
         let user_stmt = "SELECT * FROM USERS WHERE username = ?";
+        console.log("login page username " + username);
         //look for username & pw
-        sql.query(user_stmt, username, (err, result, fields) => {
+        sql.query(user_stmt, username, async (err, result, fields) => {
           if(err){
             var login_error = "This username or password does not exist. Please try again or register.";
             res.render("login", {
@@ -34,8 +35,9 @@ router.post("/loginpost", function(req, res) {
               login_error: login_error
             });
           } else {
+            console.log("Length: " + result.length);
             if(result.length > 0){
-              const comparison = bcrypt.compare(password, result[0].password);
+              const comparison = await bcrypt.compare(password, result[0].password);
               if(comparison){
                 constants.curr_user.username = username;
                 constants.curr_user.fname = result[0].fname;
@@ -43,12 +45,7 @@ router.post("/loginpost", function(req, res) {
                 const total_questions = Number(result[0].totalquestions);
                 const correct = Number(result[0].correct);
 
-                console.log(total_questions);
-                console.log(correct);
-
                 const total_score = Math.round((correct / total_questions) * 100);
-
-                console.log(total_score);
 
                 constants.curr_user.total_score = total_score;
 
