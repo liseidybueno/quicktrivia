@@ -35,11 +35,9 @@
       <script type="text/javascript">
 
         $("#loginbutton").click(function(e) {
-          var location = "http://localhost:8000";
           e.preventDefault();
           $.ajax({
-            global: true,
-           url: '/loginpost',
+           url: 'https://quicktrivia.herokuapp.com/loginpost',
            type: "POST",
           data: {
                username: document.getElementById("username").value,
