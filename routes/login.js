@@ -27,11 +27,8 @@ router.post("/login", function(req, res) {
       if (username == "") {
         //username is blank
         var login_error = "Username not found. Please enter a valid username or register.";
-        // res.render("login", {
-        //   curr_user: constants.curr_user,
-        //   login_error: login_error
-        // });
-        res.send({
+        res.render("login", {
+          curr_user: constants.curr_user,
           login_error: login_error
         });
       } else { //else if it is not blank
@@ -41,11 +38,8 @@ router.post("/login", function(req, res) {
         sql.query(user_stmt, username, async (err, result, fields) => {
           if(err){
             var login_error = "This username or password does not exist. Please try again or register.";
-            // res.render("login", {
-            //   curr_user: constants.curr_user,
-            //   login_error: login_error
-            // });
-            res.send({
+            res.render("login", {
+              curr_user: constants.curr_user,
               login_error: login_error
             });
           } else {
@@ -68,29 +62,19 @@ router.post("/login", function(req, res) {
                 // if(process.env.PORT != null || process.env.PORT != ""){
                 //   const url = "https://quicktrivia.herokuapp.com/";
                 // }
-                //
-                // res.redirect(url);
-                res.send({
-                  redirect: true,
-                  redirect_url: ('/')
-                });
+
+                res.redirect("/");
               } else {
                 var login_error = "Username and password do not match.";
-                // res.render("login", {
-                //   curr_user: constants.curr_user,
-                //   login_error: login_error
-                // });
-                res.send({
+                res.render("login", {
+                  curr_user: constants.curr_user,
                   login_error: login_error
                 });
               }
             } else {
               var login_error = "Username does not exist.";
-              // res.render("login", {
-              //   curr_user: constants.curr_user,
-              //   login_error: login_error
-              // });
-              res.send({
+              res.render("login", {
+                curr_user: constants.curr_user,
                 login_error: login_error
               });
             }
