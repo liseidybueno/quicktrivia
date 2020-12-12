@@ -35,7 +35,7 @@ router.post("/loginpost", function(req, res) {
             });
           } else {
             if(result.length > 0){
-              const comparison = await bcrypt.compare(password, result[0].password);
+              const comparison = bcrypt.compare(password, result[0].password);
               if(comparison){
                 constants.curr_user.username = username;
                 constants.curr_user.fname = result[0].fname;
