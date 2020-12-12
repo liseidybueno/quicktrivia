@@ -52,7 +52,13 @@ router.post("/loginpost", function(req, res) {
 
                 constants.curr_user.total_score = total_score;
 
-                res.redirect("./home/");
+                const url = "/";
+
+                if(process.env.PORT != null || process.env.PORT != ""){
+                  const url = "https://quicktrivia.herokuapp.com/";
+                }
+
+                res.redirect(url);
               } else {
                 var login_error = "Username and password do not match.";
                 res.render("login", {
