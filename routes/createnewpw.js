@@ -11,99 +11,91 @@ const saltRounds = 10;
 
 router.get("/createnew", function(req, res) {
   res.render("createnewpw", {
-    curr_user: constants.curr_user
+    curr_user: constants.curr_user,
+    error_msg: ""
   });
 });
 
-router.post("/createnew", function(req, res) {
+router.post("/createnew", async function(req, res) {
   //get the passwords
   const username = req.body.username;
   const new_pw = req.body.newpw;
-  const confirm_new_pw = req.body.confirmnewpw;
+  const confirm_new_pw = req.body.confirmpw;
 
-  var error_msg = "";
-  var custom_msgs = new Array();
+  var error_msg = new Array();
 
-  if (username == "") {
-    error_msg = "Enter your username.";
-    res.send({
-      error_msg: error_msg
+  if (username == "" || new_pw == "" || confirm_new_pw == "") {
+    error_msg.push("All fields must be filled.");
+    res.render("createnewpw", {
+      error_msg: error_msg,
+      curr_user: constants.curr_user
     });
   } else {
-    //if the first field is empty
-    if (new_pw == "") {
-      error_msg = "Enter a new password.";
-      res.send({
-        error_msg: error_msg
+    //if all fields are filled
+    //compare passwords against each other and make sure they are the same
+    if (new_pw != confirm_new_pw) {
+      error_msg.push("Passwords do not match.");
+      res.render("createnewpw", {
+        error_msg: error_msg,
+        curr_user: constants.curr_user
       });
     } else {
-      //if the second field is empty
-      if (confirm_new_pw == "") {
-        error_msg = "Confirm new password.";
-        res.send({
-          error_msg: error_msg
+      //if the passswords do match, check for validation
+      var viewList = lib.passwordSchema.validate(confirm_new_pw, {
+        list: true
+      });
+
+      //if the viewList list is populated, then push each error message into an
+      //array of custom validation messages and send to client
+      if (viewList.length > 0) {
+        error_msg = lib.validatePWMsg(viewList);
+
+        res.render("createnewpw", {
+          error_msg: error_msg,
+          curr_user: constants.curr_user
         });
+
       } else {
-        //if both fields are filled
-        //compare passwords against each other and make sure they are the same
-        if (new_pw != confirm_new_pw) {
-          error_msg = "Passwords do not match.";
-          res.send({
-            error_msg: error_msg
-          });
-        } else {
-          //if the passswords do match, check for validation
-          var viewList = lib.passwordSchema.validate(confirm_new_pw, {
-            list: true
-          });
+        //if there are no errors, then update password in database with hash
+        const encryptedPassword = await bcrypt.hash(confirm_new_pw, saltRounds);
+        var update_password = "UPDATE USERS SET password = ? WHERE username = ?";
 
-          //if the viewList list is populated, then push each error message into an
-          //array of custom validation messages and send to client
-          if (viewList.length > 0) {
-            custom_msgs = lib.validatePWMsg(viewList);
+        var update_pw_info = [encryptedPassword, username];
+        sql.query(update_password, update_pw_info, (err, result, fields) => {
+          console.log(result.affectedRows);
 
-            res.send({
-              message: custom_msgs
+          if (result.affectedRows == 0) {
+            error_msg.push("This username does not exist.");
+            res.render("createnewpw", {
+              error_msg: error_msg,
+              curr_user: constants.curr_user
             });
-
           } else {
-            error_msg = "";
-            //if there are no errors, then update password in database with hash
-            bcrypt.hash(confirm_new_pw, saltRounds, function(err, hash) {
-              var update_password = "UPDATE USERS SET password = ? WHERE username = ?";
+            //get the username, first name and score of the user and update the global variables
+            var get_user_info = "SELECT * FROM USERS WHERE username = ?";
 
-              var update_pw_info = [hash, username];
-              sql.query(update_password, update_pw_info, (err, result, fields) => {});
+            sql.query(get_user_info, username, (err, result, fields) => {
+              constants.curr_user.fname = result[0].fname;
+              constants.curr_user.username = result[0].username;
 
-              //get the username, first name and score of the user and update the global variables
-              var get_user_info = "SELECT * FROM USERS WHERE username = ?";
+              var correct = result[0].correct;
+              var totalquestions = result[0].totalquestions;
 
-              sql.query(get_user_info, username, (err, result, fields) => {
-                constants.curr_user.fname = result[0].fname;
-                constants.curr_user.username = result[0].username;
+              //get the score as percentage and round to the nearest whole number
+              var total_score = Math.round((correct / totalquestions) * 100);
 
-                var correct = result[0].correct;
-                var totalquestions = result[0].totalquestions;
+              constants.curr_user.total_score = total_score;
 
-                //get the score as percentage and round to the nearest whole number
-                var total_score = Math.round((correct / totalquestions) * 100);
-
-                constants.curr_user.total_score = total_score;
-
-              });
-
-              res.send({
-                redirect: true,
-                redirect_url: "/"
-              });
+              res.redirect("/");
 
             });
           }
-        }
+
+
+        });
       }
     }
   }
-
 });
 
 module.exports = router;

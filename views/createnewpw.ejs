@@ -6,60 +6,20 @@
     <h2>Create New Password</h2>
   </div>
 
-  <div id="error_msg"></div>
-<div class="login-form">
+  <div class="error_msg">
+    <% for(var i = 0; i < error_msg.length; i++){ %>
+      <p>
+        <%= error_msg[i]; %>
+        </p>
+    <% } %>
+  </div>
+<form class="login-form" action="/createnew" method="post">
       <input type="text" class="top" id="username" name="username" placeholder="Username" />
       <input class="middle" type="password" id="newpw" name="newpw" placeholder="New Password" />
       <input class="bottom" type="password" id="confirmpw" name="confirmpw" placeholder="Confirm Password" />
         <button class="register-button" type="submit" id="submitnewpw" name="button">Submit</button>
-      </div>
+      </form>
 
       </div>
-
-      <script type="text/javascript">
-
-        $("submitnewpw").click(function(e) {
-          e.preventDefault();
-          $.ajax({
-            url: "/createnew",
-            type: "POST",
-            data: {
-              username: document.getElementById("username").value,
-              newpw: document.getElementById("newpw").value,
-              confirmnewpw: document.getElementById("confirmpw").value
-            },
-            success: function(returned_data){
-              if (returned_data.redirect) {
-                document.getElementById('error_msg').style.display = "none";
-                  window.location.href = returned_data.redirect_url;
-                }
-                //get the div variable
-                var div = document.getElementById('error_msg');
-                div.innerHTML = "";
-                //if there is an error message, display it
-              if(returned_data.error_msg != ""){
-                var para = document.createElement("p");
-                para.style.margin = "1px";
-                var message = document.createTextNode(returned_data.error_msg);
-                para.appendChild(message);
-                div.appendChild(para);
-              }
-              if(returned_data.message.length > 0){
-                for(var i = 0; i < returned_data.message.length; i++){
-                  var para = document.createElement("p");
-                  para.style.margin = "1px";
-                  var message = document.createTextNode(returned_data.message[i]);
-                  para.appendChild(message);
-                  div.appendChild(para);
-                }
-                document.getElementById("confirmpw").value = "";
-              }
-
-
-            }
-          });
-        });
-      </script>
-
 
 </div>

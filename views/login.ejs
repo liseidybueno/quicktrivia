@@ -32,36 +32,6 @@
 
       </div>
 
-      <!-- <script type="text/javascript">
-
-
-        $("#loginbutton").click(function(e) {
-          e.preventDefault();
-         $.ajax({
-          url: 'https://quicktrivia.herokuapp.com/login',
-          type: "POST",
-          data: {
-               username: document.getElementById("username").value,
-              password: document.getElementById("password").value,
-        },
-            success: function(returned_data){
-              if (returned_data.redirect) {
-              window.location.href = returned_data.redirect_url;
-              } else {
-               var div = document.getElementById('login-error');
-               div.innerHTML = "";
-               var para = document.createElement("p");
-               var msg = document.createTextNode(returned_data.login_error);
-               para.appendChild(msg);
-               div.appendChild(para);
-               document.getElementById("password").value = "";
-           }
-             }
-         });
-     });
-      </script> -->
-
-
 </div>
 </body>
 </html>
