@@ -68,7 +68,6 @@ router.post("/reset-sec", function(req, res) {
 
   console.log("username: " + username);
 
-  if(security_answer == correct )
   //look for the username in the database and check to see if the security answer is the same
   var security_query = "SELECT * FROM USERS WHERE username = ?";
 
