@@ -6,6 +6,9 @@
     Quick Trivia is a trivia app that uses an API from opentdb.com to search for questions and create a quiz in different categories from 5-20 questions. Users can create profiles to receive an overall rank for all quizzes they take.
     <br />
 </p>
+<p align="center">
+<a href="https://quicktrivia.herokuapp.com/">View demo</a>
+</p>
 
 <h3 align="center>ABOUT THE PROJECT</h3>
 
