@@ -11,7 +11,10 @@ const saltRounds = 10;
 
 router.get("/resetpassword", function(req, res) {
   res.render("resetpassword", {
-    curr_user: constants.curr_user
+    curr_user: constants.curr_user,
+    error_msg: "",
+    security_question: "",
+    username: ""
   });
 });
 
@@ -35,17 +38,23 @@ router.post("/resetpassword", function(req, res) {
           if (!err) {
             //send the question
             var security_question = result[0].question;
-            res.send({
-              security_question: security_question
+            res.render("resetpassword", {
+              username: username,
+              curr_user: constants.curr_user,
+              security_question: security_question,
+              error_msg: ""
             })
           }
         });
       } else {
         //otherwise, send error message
         error_msg = "This username does not exist. Please try another or register for an account.";
-        res.send({
+        res.render("resetpassword", {
+          username: username,
+          curr_user: constants.curr_user,
+          security_question: "",
           error_msg: error_msg
-        })
+        });
       }
     }
   });
@@ -53,13 +62,13 @@ router.post("/resetpassword", function(req, res) {
 
 router.post("/reset-sec", function(req, res) {
   //get the security answer  and username
-  const security_answer = req.body.sec_answer;
+  const security_answer = req.body.security_answer;
   const username = req.body.username;
   var error_msg = "";
-  constants.curr_user.username = username;
 
-  console.log(security_answer);
-  console.log(username);
+  console.log("username: " + username);
+
+  if(security_answer == correct )
   //look for the username in the database and check to see if the security answer is the same
   var security_query = "SELECT * FROM USERS WHERE username = ?";
 
@@ -68,19 +77,20 @@ router.post("/reset-sec", function(req, res) {
       //get the security answer from the db
       var correct_answer = result[0].securityanswer;
 
-      console.log(correct_answer);
+      console.log("Entered answer: " + security_answer)
+      console.log("correct answer: " + correct_answer);
 
       //if they are the same, then go to the create new password page
       if (security_answer == correct_answer) {
         error_msg = "";
-        res.send({
-          redirect: true,
-          redirect_url: "/createnew"
-        });
+        res.redirect("/createnew");
       } else {
         //if they aren't the same, send error message
         error_msg = "The security answer is incorrect. Please try again or send an email to reset your password.";
-        res.send({
+        res.render("resetpassword", {
+          username: username,
+          curr_user: constants.curr_user,
+          security_question: "",
           error_msg: error_msg
         });
       }
