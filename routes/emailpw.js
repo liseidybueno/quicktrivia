@@ -46,8 +46,13 @@ router.post("/emailpw", function(req, res) {
         console.log(error);
       } else {
         console.log("email sent");
-        res.send({
-          error_msg: "Your email has been sent!"
+        var error_msg = new Array();
+        error_msg.push("Your email has been sent!");
+        res.render("resetpassword", {
+          username: username,
+          curr_user: constants.curr_user,
+          security_question: "",
+          error_msg: error_msg
         });
       }
     });
