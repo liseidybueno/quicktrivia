@@ -52,17 +52,17 @@ router.post("/emailpw", function(req, res) {
         console.log(email);
 
         var transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-          port: 465,
-          secure: true,
+          service: "gmail",
           auth: {
+            type: "OAuth2",
             user: process.env.EMAIL,
-            pass: process.env.EMAIL_PW
-          },
-          tls: {
-            rejectUnauthorized: false
+            clientId: "469086209980-bh0m4qnc1slafpv5iuktf1j4j7bq3b1t.apps.googleusercontent.com",
+            clientSecret: "AXc5hXYAKS-fEx9IdKGjgh4B",
+            refreshToken: "1//04JuMpHhAtBC5CgYIARAAGAQSNwF-L9Ir-Pw7i00N0C3eZjy9sZum2fxhlKJQeDQ62NxpU_4Shi5dE6TZeHgsd8KerZt64gGLiEE",
+            accessToken: "ya29.a0AfH6SMB8ofqYLwCX5fUBmrFsRhwZSFveGqXuFcyQLwvZ4JToLn8YDTP3YL8m_E41lYLag5_R0KEtaooa8cOhxgFnHHf9JVMS1GuAywCNRV-0Lb-ITo1HXvOFTr4FIDcIXiyCfq1EGq82JcV4uGPWVGJrUi6F3O9QBqL6ubHPK_c"
           }
         });
+
 
         var mailOptions = {
           from: 'liseidybueno@gmail.com',
@@ -78,7 +78,6 @@ router.post("/emailpw", function(req, res) {
             console.log("email sent");
             var error_msg = new Array();
             error_msg.push("Your email has been sent!");
-            transporter.close();
             res.render("resetpassword", {
               username: username,
               curr_user: constants.curr_user,
@@ -99,17 +98,6 @@ router.post("/emailpw", function(req, res) {
   }
 
 
-    // var transporter = nodemailer.createTransport({
-    //   service: "gmail",
-    //   auth: {
-    //     type: "OAuth2",
-    //     user: process.env.EMAIL,
-    //     clientId: "123745007922-tskba5l8jsmfv1ok8uteg2p9dj9f74lp.apps.googleusercontent.com",
-    //     clientSecret: "KAstSetFa7GlZO2SlRFOrM1b",
-    //     refreshToken: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs",
-    //   //  accessToken: accessToken
-    //   }
-    // });
 
 // var transporter = nodemailer.createTransport({
 //   host: 'smtp.gmail.com',
