@@ -19,7 +19,7 @@ const router = express.Router();
 // oauth2Client.setCredentials({
 //      refresh_token: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs"
 // });
-const accessToken = oauth2Client.getAccessToken()
+// const accessToken = oauth2Client.getAccessToken()
 
 router.post("/emailpw", function(req, res) {
 
