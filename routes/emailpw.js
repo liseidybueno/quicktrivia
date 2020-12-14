@@ -49,10 +49,7 @@ router.post("/emailpw", function(req, res) {
         refreshToken: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs",
         accessToken: accessToken
       }
-    },
-    tls: {
-        rejectUnauthorized: false
-    });
+    );
 
 
     var mailOptions = {
