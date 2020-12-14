@@ -26,9 +26,9 @@ The email function uses google OAUTH2. You may either create a project using you
 opt to use nodemailer locally without OAuth2.
 
 <!-- CONTACT -->
-## Developer CONTACT
+## Developer Contact 
 
-If you have any questions, feel free to reach me at liseidybueno@gmail.com. 
+If you have any questions, feel free to reach me at liseidybueno@gmail.com.
 
 <!-- SCREENSHOTS -->
 ## Images
