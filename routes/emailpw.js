@@ -28,29 +28,76 @@ router.post("/emailpw", function(req, res) {
   //get the first name from the DB
   var email_query = "SELECT * FROM USERS WHERE username = ?";
 
-  var fname = "";
-  var email = "";
+  var error_msg = new Array();
 
-  sql.query(email_query, username, (err, result, fields) => {
-    if (!err) {
-      email = result[0].email,
-        fname = result[0].fname
-    }
-
-    console.log(email);
-
-    var transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: {
-        user: process.env.EMAIL,
-        pass: process.env.EMAIL_PW
-      },
-      tls: {
-        rejectUnauthorized: false
-      }
+  if(username == ""){
+    error_msg.push("Please enter a valid username.");
+    res.render("resetpassword", {
+      username: username,
+      curr_user: constants.curr_user,
+      security_question: "",
+      error_msg: error_msg
     });
+  } else {
+    sql.query(email_query, username, (err, result, fields) => {
+      if (!err) {
+
+        if(result.length > 0){
+          var fname = "";
+          var email = "";
+
+          email = result[0].email,
+          fname = result[0].fname,
+
+        console.log(email);
+
+        var transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          auth: {
+            user: process.env.EMAIL,
+            pass: process.env.EMAIL_PW
+          },
+          tls: {
+            rejectUnauthorized: false
+          }
+        });
+
+        var mailOptions = {
+          from: 'liseidybueno@gmail.com',
+          to: email,
+          subject: 'Quick Trivia Reset Password',
+          html: '<p>Hi, ' + fname + '!</p><p>Your username is: ' + username + '</p><p>Click here to reset password: <a href="hhttps://quicktrivia.herokuapp.com/createnew">Create New</a>'
+        }
+
+        transporter.sendMail(mailOptions, function(error, info) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log("email sent");
+            var error_msg = new Array();
+            error_msg.push("Your email has been sent!");
+            transporter.close();
+            res.render("resetpassword", {
+              username: username,
+              curr_user: constants.curr_user,
+              security_question: "",
+              error_msg: error_msg
+            });
+          }
+        });
+      } else {
+    error_msg.push("Please enter a valid username.");
+    res.render("resetpassword", {
+      username: username,
+      curr_user: constants.curr_user,
+      security_question: "",
+      error_msg: error_msg
+    });
+  }
+  }
+
 
     // var transporter = nodemailer.createTransport({
     //   service: "gmail",
@@ -78,31 +125,9 @@ router.post("/emailpw", function(req, res) {
 //   }
 // });
 
-    var mailOptions = {
-      from: 'liseidybueno@gmail.com',
-      to: email,
-      subject: 'Quick Trivia Reset Password',
-      html: '<p>Hi, ' + fname + '!</p><p>Your username is: ' + username + '</p><p>Click here to reset password: <a href="hhttps://quicktrivia.herokuapp.com/createnew">Create New</a>'
-    }
-
-    transporter.sendMail(mailOptions, function(error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("email sent");
-        var error_msg = new Array();
-        error_msg.push("Your email has been sent!");
-        transporter.close();
-        res.render("resetpassword", {
-          username: username,
-          curr_user: constants.curr_user,
-          security_question: "",
-          error_msg: error_msg
-        });
-      }
-    });
-
   });
+
+}
 
 });
 
