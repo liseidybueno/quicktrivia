@@ -55,7 +55,7 @@ router.post("/emailpw", function(req, res) {
           service: "gmail",
           auth: {
             type: "OAuth2",
-            user: process.env.EMAIL,
+            user: "liseidybueno@gmail.com",
             clientId: "469086209980-bh0m4qnc1slafpv5iuktf1j4j7bq3b1t.apps.googleusercontent.com",
             clientSecret: "AXc5hXYAKS-fEx9IdKGjgh4B",
             refreshToken: "1//04JuMpHhAtBC5CgYIARAAGAQSNwF-L9Ir-Pw7i00N0C3eZjy9sZum2fxhlKJQeDQ62NxpU_4Shi5dE6TZeHgsd8KerZt64gGLiEE",
