@@ -363,6 +363,10 @@ Question Page */
   color: #f2f2f2;
 }
 
+.pwrules {
+  font-size: .8rem;
+}
+
 .error_msg {
   font-size: .8rem;
   margin-bottom: 2%;

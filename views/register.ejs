@@ -6,6 +6,7 @@
   </div>
 
 <div class="error_msg">
+
   <% for(var i = 0; i < register_error.length; i++){ %>
     <p>
       <%= register_error[i]; %>
@@ -19,6 +20,9 @@
     <input class="middle" type="text" id="username" name="username" placeholder="Username" />
     <input class="middle" type="email" id="email" name="email" placeholder="Email" />
     <input class="bottom" type="password" id="password" name="password" placeholder="Password">
+    <p class="pwrules">
+      Your password must contain at least 6 characters, one lowercase letter, one uppercase letter, and one number.
+      </p>
     <label class="security-question" for="security-questions">Security Question</label>
     <select class="top-select" id="sec_quest" name="sec_quest">
       <option value="1">What was your childhood nickname?</option>
