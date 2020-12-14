@@ -68,7 +68,7 @@ router.post("/emailpw", function(req, res) {
           from: process.env.EMAIL,
           to: email,
           subject: 'Quick Trivia Reset Password',
-          html: '<p>Hi, ' + fname + '!</p><p>Your username is: ' + username + '</p><p>Click here to reset password: <a href="hhttps://quicktrivia.herokuapp.com/createnew">Create New</a>'
+          html: '<p>Hi, ' + fname + '!</p><p>Your username is: ' + username + '</p><p>Click here to reset password: <a href="https://quicktrivia.herokuapp.com/createnew">Create New</a>'
         }
 
         transporter.sendMail(mailOptions, function(error, info) {

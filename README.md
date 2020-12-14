@@ -22,7 +22,13 @@ Quick trivia is a Javascript project built using Node.js, Express, and EJS templ
 
 This project was built using Node.js. All that is needed to run it is npm installation with express, body parser, and ejs.
 Open localhost://8000 to view the app on your web browser. The MYSQL database is remote but can be changed to a local database if desired.
-If you would like to test the "email" functionality, be sure to replace the .env variables with your email address and password. The app currently uses gmail.
+The email function uses google OAUTH2. You may either create a project using your own google OAuth2 credentials or
+opt to use nodemailer locally without OAuth2.
+
+<!-- CONTACT -->
+## Developer CONTACT
+
+If you have any questions, feel free to reach me at liseidybueno@gmail.com. 
 
 <!-- SCREENSHOTS -->
 ## Images
