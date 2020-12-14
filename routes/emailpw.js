@@ -9,16 +9,16 @@ const lib = require('./../index.js');
 const sql = require("./../config.js");
 const constants = require("./../constants.js");
 const router = express.Router();
+//
+// const oauth2Client = new OAuth2(
+//   "123745007922-tskba5l8jsmfv1ok8uteg2p9dj9f74lp.apps.googleusercontent.com", //clientID
+//   "KAstSetFa7GlZO2SlRFOrM1b", //client secret
+//   "https://developers.google.com/oauthplayground" //redirect URL
+// );
 
-const oauth2Client = new OAuth2(
-  "123745007922-tskba5l8jsmfv1ok8uteg2p9dj9f74lp.apps.googleusercontent.com", //clientID
-  "KAstSetFa7GlZO2SlRFOrM1b", //client secret
-  "https://developers.google.com/oauthplayground" //redirect URL
-);
-
-oauth2Client.setCredentials({
-     refresh_token: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs"
-});
+// oauth2Client.setCredentials({
+//      refresh_token: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs"
+// });
 const accessToken = oauth2Client.getAccessToken()
 
 router.post("/emailpw", function(req, res) {
@@ -40,17 +40,43 @@ router.post("/emailpw", function(req, res) {
     console.log(email);
 
     var transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
-        type: "OAuth2",
         user: process.env.EMAIL,
-        clientId: "123745007922-tskba5l8jsmfv1ok8uteg2p9dj9f74lp.apps.googleusercontent.com",
-        clientSecret: "KAstSetFa7GlZO2SlRFOrM1b",
-        refreshToken: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs",
-        accessToken: accessToken
+        pass: process.env.EMAIL_PW
+      },
+      tls: {
+        rejectUnauthorized: false
       }
     });
 
+    // var transporter = nodemailer.createTransport({
+    //   service: "gmail",
+    //   auth: {
+    //     type: "OAuth2",
+    //     user: process.env.EMAIL,
+    //     clientId: "123745007922-tskba5l8jsmfv1ok8uteg2p9dj9f74lp.apps.googleusercontent.com",
+    //     clientSecret: "KAstSetFa7GlZO2SlRFOrM1b",
+    //     refreshToken: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs",
+    //   //  accessToken: accessToken
+    //   }
+    // });
+
+// var transporter = nodemailer.createTransport({
+//   host: 'smtp.gmail.com',
+//   port: 465,
+//   secure: true,
+//   auth: {
+//     type: 'OAuth2',
+//         user: process.env.EMAIL,
+//         clientId: "123745007922-tskba5l8jsmfv1ok8uteg2p9dj9f74lp.apps.googleusercontent.com",
+//         clientSecret: "KAstSetFa7GlZO2SlRFOrM1b",
+//         refreshToken: "1//04X1kOdvgfp3kCgYIARAAGAQSNwF-L9Ir95SyguHfmcQhW4boc6bWogQDmO5tBtBsp0lsj59k-4H2-tmJrJKvxVllrZwmFBMIBXs",
+//        accessToken: accessToken
+//   }
+// });
 
     var mailOptions = {
       from: 'liseidybueno@gmail.com',
